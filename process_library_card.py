@@ -7,17 +7,20 @@ lines = file_contents.split("\n")
 call_number = lines[0]
 print "Call number: " + call_number
 
-authorname = lines[1]
-print "Author: " + authorname
+author_name = lines[1]
+print "Author: " + author_name
 
-booktitle = lines[2]
-print "Book title: " + booktitle
+book_title = lines[2]
+print "Book title: " + book_title
 
 due_dates = lines[3:]
 # print "Due dates: " + str(due_dates)
 
 # make a list of month abbreviations
 all_months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+
+# create a list to save our clean data
+clean_data = []
 
 for date in due_dates:
 	date_parts = date.split()
@@ -27,18 +30,15 @@ for date in due_dates:
 	
 	#	print "Month: " + month + " / " + "Day: " + day + " / " + "Year: " + year
 	
-	# first, dealing with years that 
-	# have ' in front (e.g. '59)
+	# first, dealing with years that have ' in front (e.g. '59)
 	if year.startswith("'"):
 		new_year = "19" + year[1:]
 
-	# next, deal with years that are 
-	# just two digits (e.g. 60)
+	# next, deal with years that are just two digits (e.g. 60)
 	elif len(year) == 2:
 		new_year = "19" + year
 		
-	# finally, assume any other years 
-	# are formatted OK and just pass them on
+	# finally, assume any other years are formatted OK and just pass them on
 	else:
 		new_year = year
 		
@@ -50,7 +50,28 @@ for date in due_dates:
 	month_index = all_months.index(month)
 	new_month = month_index + 1
 	
-#	print "New month: " + str(new_month)
-	print "New Date: " + day + "/" + str(new_month) + "/" + new_year
+	# print "New month: " + str(new_month)
+	print "New Date: " + day + "/" + str(new_month) + "/" + new_year + "\n"
+	
+	# add our cleaned data to the overall cleaned up list
+	# clean_data.append([new_year, str(new_month), day])
+	cleaned_due_date = new_year + "-" + str(new_month) + "-" + day
+	clean_data.append(cleaned_due_date)
 
-print "Congratulations, script succeeded!"
+print "Congratulations, data successfully processed!"
+
+# print "Clean data:" + str(clean_data)
+
+# now we need to save out our nicely formatted data!
+file_handler = open("library-card-clean.txt", "w")
+
+file_handler.write(call_number + "\n")
+file_handler.write(author_name + "\n")
+file_handler.write(book_title + "\n")
+
+for cleaned_date in clean_data:
+	file_handler.write(cleaned_date + "\n")
+
+file_handler.close()
+
+print "All done, good job!"
