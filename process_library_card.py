@@ -14,7 +14,7 @@ booktitle = lines[2]
 print "Book title: " + booktitle
 
 due_dates = lines[3:]
-print "Due dates: " + str(due_dates)
+# print "Due dates: " + str(due_dates)
 
 for date in due_dates:
 	date_parts = date.split()
@@ -22,4 +22,13 @@ for date in due_dates:
 	day = date_parts[1]
 	year = date_parts[2]
 	
-	print "Month: " + month + " / " + "Day: " + day + " / " + "Year: " + year
+	#	print "Month: " + month + " / " + "Day: " + day + " / " + "Year: " + year
+	
+	if year.startswith("'"):
+		new_year = "19" + year[1:]
+	elif len(year) == 2:
+		new_year = "19" + year
+	else:
+		new_year = year
+		
+	print "Date: " + day + " " + month + " " + new_year + " - (" + year + ")"
