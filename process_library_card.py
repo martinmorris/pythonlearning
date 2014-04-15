@@ -40,3 +40,6 @@ for date in due_dates:
 		new_year = year
 		
 	print "Date: " + day + " " + month + " " + new_year + " - (" + year + ")"
+	assert len(new_year) == 4
+	
+print "Congratulations, script succeeded!"
