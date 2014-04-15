@@ -24,10 +24,18 @@ for date in due_dates:
 	
 	#	print "Month: " + month + " / " + "Day: " + day + " / " + "Year: " + year
 	
+	# first, dealing with years that 
+	# have ' in front (e.g. '59)
 	if year.startswith("'"):
 		new_year = "19" + year[1:]
+
+	# next, deal with years that are 
+	# just two digits (e.g. 60)
 	elif len(year) == 2:
 		new_year = "19" + year
+		
+	# finally, assume any other years 
+	# are formatted OK and just pass them on
 	else:
 		new_year = year
 		
