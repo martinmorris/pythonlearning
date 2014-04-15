@@ -16,6 +16,9 @@ print "Book title: " + booktitle
 due_dates = lines[3:]
 # print "Due dates: " + str(due_dates)
 
+# make a list of month abbreviations
+all_months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+
 for date in due_dates:
 	date_parts = date.split()
 	month = date_parts[0]
@@ -40,6 +43,14 @@ for date in due_dates:
 		new_year = year
 		
 	print "Date: " + day + " " + month + " " + new_year + " - (" + year + ")"
-	assert len(new_year) == 4
+	assert len(new_year) == 4, "ERROR: Year does not have 4 digits"
 	
+	# convert month names to numbers
+	assert month in all_months, "ERROR: Invalid month name"
+	month_index = all_months.index(month)
+	new_month = month_index + 1
+	
+#	print "New month: " + str(new_month)
+	print "New Date: " + day + "/" + str(new_month) + "/" + new_year
+
 print "Congratulations, script succeeded!"
